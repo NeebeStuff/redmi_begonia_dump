@@ -1,0 +1,51 @@
+####################################
+# from device/redmi/begonia/product.prop
+####################################
+#ro.apex.updatable=true
+#ro.sf.lcd_density=462
+ro.vendor.mtk_pq_support=0
+ro.vendor.mtk_hdr_video_support=0
+#ro.control_privapp_permissions=log
+ro.bionic.arch=arm64
+ro.bionic.cpu_variant=cortex-a76
+ro.bionic.2nd_arch=arm
+ro.bionic.2nd_cpu_variant=cortex-a76
+dalvik.vm.isa.arm64.variant=cortex-a76
+dalvik.vm.isa.arm64.features=default
+dalvik.vm.isa.arm.variant=cortex-a76
+dalvik.vm.isa.arm.features=default
+dalvik.vm.heapstartsize=16m
+dalvik.vm.heapgrowthlimit=256m
+dalvik.vm.heapsize=512m
+dalvik.vm.heaptargetutilization=0.5
+dalvik.vm.heapminfree=8m
+dalvik.vm.heapmaxfree=32m
+dalvik.vm.dex2oat64.enabled=true
+#pm.dexopt.bg-dexopt=speed
+#pm.dexopt.first-boot=speed
+#pm.dexopt.boot-after-ota=verify
+####################################
+# from variable ADDITIONAL_PRODUCT_PROPERTIES
+####################################
+dalvik.vm.systemservercompilerfilter=speed-profile
+ro.build.characteristics=default
+####################################
+# from variable PRODUCT_PRODUCT_PROPERTIES
+####################################
+ro.opa.eligible_device=true
+ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;com.google.android.systemui.gxoverlay
+ro.setupwizard.enterprise_mode=1
+ro.setupwizard.esim_cid_ignore=00000001
+ro.setupwizard.rotation_locked=true
+setupwizard.feature.baseline_setupwizard_enabled=true
+setupwizard.feature.show_pai_screen_in_main_flow.carrier1839=false
+setupwizard.feature.show_pixel_tos=true
+setupwizard.feature.skip_button_use_mobile_data.carrier1839=true
+setupwizard.theme=glif_v3_light
+ro.com.google.ime.theme_id=5
+ro.input.video_enabled=false
+ro.config.notification_sound=Argon.ogg
+ro.config.alarm_alert=Hassium.ogg
+ro.support_one_handed_mode=true
+ro.config.ringtone=Orion.ogg
+# end of file

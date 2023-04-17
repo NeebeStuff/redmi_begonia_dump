@@ -1,0 +1,7 @@
+on boot
+  chown system system /sys/class/leds/vibrator/max_brightness
+
+service vendor.vibrator-default /system/bin/hw/android.hardware.vibrator@1.2-service-begonia
+  class hal
+  user system
+  group system

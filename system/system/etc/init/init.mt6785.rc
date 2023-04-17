@@ -1,0 +1,176 @@
+on boot && property:ro.boot.selinux=permissive
+  # prevent SafetyNet to check selinux state
+  exec u:r:su:s0 -- /bin/touch /dev/tmp/prop_override
+  exec u:r:su:s0 -- /bin/setprop ro.boot.selinux enforcing
+  exec u:r:su:s0 -- /bin/rm /dev/tmp/prop_override
+  chmod 0640 /sys/fs/selinux/enforce
+  chmod 0440 /sys/fs/selinux/policy
+
+on boot
+  stop console
+
+  # fingerprint
+  exec u:r:su:s0 -- /bin/touch /dev/tmp/prop_override
+  exec u:r:su:s0 -- /bin/setprop ro.product.name begonia
+  exec u:r:su:s0 -- /bin/setprop ro.build.flavor begonia-user
+  exec u:r:su:s0 -- /bin/setprop ro.build.id RP1A.200720.011
+  exec u:r:su:s0 -- /bin/setprop ro.build.display.id RP1A.200720.011
+  exec u:r:su:s0 -- /bin/setprop ro.build.description "begonia-user 11 RP1A.200720.011 V12.5.8.0.RGGMIXM release-keys"
+  exec u:r:su:s0 -- /bin/setprop ro.build.fingerprint Redmi/begonia/begonia:11/RP1A.200720.011/V12.5.8.0.RGGMIXM:user/release-keys
+  #exec u:r:su:s0 -- /bin/setprop ro.build.version.security_patch 2022-04-01
+  #exec u:r:su:s0 -- /bin/setprop ro.build.version.incremental V12.5.8.0.RGGMIXM
+  #exec u:r:su:s0 -- /bin/sh -c "setprop ro.build.version.incremental `date +%s`"
+  exec u:r:su:s0 -- /bin/rm /dev/tmp/prop_override
+
+  chown system wifi /dev/rfkill
+  chmod 0664 /dev/vpu
+  chmod 0664 /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+
+  exec u:r:su:s0 -- /bin/sh -c "rm /data/vendor/camera_dump/*.tuning"
+
+on init
+  # startup boost
+  exec u:r:su:s0 -- /bin/sh -c "setprop sys.cpu.policy0.governor `cat /sys/devices/system/cpu/cpufreq/policy0/scaling_governor`"
+  exec u:r:su:s0 -- /bin/sh -c "setprop sys.cpu.policy6.governor `cat /sys/devices/system/cpu/cpufreq/policy6/scaling_governor`"
+  exec u:r:su:s0 -- /bin/sh -c "echo performance >/sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
+  exec u:r:su:s0 -- /bin/sh -c "echo performance >/sys/devices/system/cpu/cpufreq/policy6/scaling_governor"
+
+  # zram
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/zram.ko
+
+  # wifi hotspot required
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/ipt_rpfilter.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/rfkill.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/xt_HL.ko
+
+  # netd required
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/nf_nat_ipv6.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/ip6table_nat.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/act_bpf.ko
+
+  # vibrator
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/vibrator.ko
+
+  # f2fs
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/crc32_generic.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/f2fs.ko
+
+  # usb ethernet
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/r8152b.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/rtl8150.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/usbnet.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/libphy.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/asix.ko
+  exec u:r:su:s0 -- /bin/insmod /system/lib/modules/ax88179_178a.ko
+
+  mkdir /dev/tmp 644
+
+on load_persist_props_action
+  exec u:r:su:s0 -- /bin/umount /vendor/firmware/wifi.cfg
+  exec u:r:su:s0 -- /bin/cp --preserve=all /vendor/firmware/wifi.cfg /dev/tmp/wifi.cfg
+  exec u:r:su:s0 -- /bin/sh -c "echo '' >>/dev/tmp/wifi.cfg"
+  exec u:r:su:s0 -- /bin/sh -c "echo Sta2gBw `getprop persist.vendor.wlan.sta2gbw | grep -q . && getprop persist.vendor.wlan.sta2gbw || echo 0` >>/dev/tmp/wifi.cfg"
+  exec u:r:su:s0 -- /bin/sh -c "echo Sta5gBw `getprop persist.vendor.wlan.sta5gbw | grep -q . && getprop persist.vendor.wlan.sta5gbw || echo 2` >>/dev/tmp/wifi.cfg"
+  exec u:r:su:s0 -- /bin/mount --bind /dev/tmp/wifi.cfg /vendor/firmware/wifi.cfg
+
+on property:sys.boot_completed=1 && property:persist.vendor.mtk_aurisys_framework_support=*
+  restart audioserver
+
+on property:sys.boot_completed=1 && property:persist.system_root.writable=1
+  exec u:r:su:s0 -- /bin/mount -o rw,remount /
+
+on property:persist.logging.enabled=1
+  exec_background u:r:su:s0 -- /bin/sh -c "dmesg >/cache/dmesg.log"
+  exec_background u:r:su:s0 -- /bin/sh -c "logcat >/cache/logcat.log"
+  exec_background u:r:su:s0 -- /bin/sh -c "logcat -b radio >/cache/radio.log"
+
+on property:persist.logging.selinux=1
+  exec_background u:r:su:s0 -- /bin/sh -c "logcat | grep -E 'avc: *denied|Access denied finding property' >/cache/selinux.log"
+
+on property:sys.boot_completed=1 && property:persist.bufferfix.enabled=1
+  stop camerahalserver
+  exec u:r:su:s0 -- /bin/mount --bind /system/lib64/libmtkcam_3rdparty.customer.so /vendor/lib64/libmtkcam_3rdparty.customer.so
+  exec u:r:su:s0 -- /bin/mount --bind /system/lib64/libmtkcam_featurepolicy.so /vendor/lib64/libmtkcam_featurepolicy.so
+  start camerahalserver
+
+on property:sys.boot_completed=1 && property:persist.bufferfix.enabled=0
+  stop camerahalserver
+  umount /vendor/lib64/libmtkcam_3rdparty.customer.so
+  umount /vendor/lib64/libmtkcam_featurepolicy.so
+  start camerahalserver
+
+on property:vendor.touch.dt2w.enabled=1
+  exec u:r:su:s0 -- /bin/sendevent /dev/input/event2 0 1 5
+  exec u:r:su:s0 -- /bin/sendevent /dev/input/event2 0 0 0
+
+on property:vendor.touch.dt2w.enabled=0
+  exec u:r:su:s0 -- /bin/sendevent /dev/input/event2 0 1 4
+  exec u:r:su:s0 -- /bin/sendevent /dev/input/event2 0 0 0
+
+on property:sys.boot_completed=1 && property:persist.sys.perf.boost=1
+  exec u:r:su:s0 -- /bin/sh -c "echo 500 >/sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us"
+  exec u:r:su:s0 -- /bin/sh -c "echo 50000 >/sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us"
+
+on property:sys.boot_completed=1 && property:persist.sys.perf.boost=0
+  exec u:r:su:s0 -- /bin/sh -c "echo 1000 >/sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us"
+  exec u:r:su:s0 -- /bin/sh -c "echo 1000 >/sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us"
+  exec u:r:su:s0 -- /bin/setprop persist.sys.perf.boost ""
+
+on property:sys.boot_completed=1
+  # cpu tweaks
+  exec u:r:su:s0 -- /bin/sh -c "getprop sys.cpu.policy0.governor >/sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
+  exec u:r:su:s0 -- /bin/sh -c "getprop sys.cpu.policy6.governor >/sys/devices/system/cpu/cpufreq/policy6/scaling_governor"
+
+  # trigger spectrum profile change
+  exec u:r:su:s0 -- /bin/sh -c "setprop persist.spectrum.profile `getprop persist.spectrum.profile`"
+
+  exec_background u:r:su:s0 -- /bin/sh -c "sleep 60; setprop persist.vendor.nfc.repair 0"
+  exec u:r:su:s0 -- /bin/sh -c "for uid in `pm list packages -U | grep 'com.miui.videoplayer ' | cut -d: -f3 | tr ',' ' '`; do export uid; iptables -A OUTPUT -m owner --uid-owner `printenv uid` -j DROP; unset uid; done"
+  exec u:r:su:s0 -- /bin/sh -c "for uid in `pm list packages -U | grep 'com.miui.videoplayer ' | cut -d: -f3 | tr ',' ' '`; do export uid; ip6tables -A OUTPUT -m owner --uid-owner `printenv uid` -j DROP; unset uid; done"
+  exec u:r:su:s0 -- /bin/sh -c "getprop persist.sys.first_boot_completed | grep -q . || { settings put system screen_brightness_mode 1; setprop persist.sys.first_boot_completed 1; }"
+  exec u:r:su:s0 -- /bin/sh -c "getprop persist.gms.location_history_fixed | grep -q . || { for perm in ACTIVITY_RECOGNITION ACCESS_BACKGROUND_LOCATION ACCESS_FINE_LOCATION; do export perm; pm grant com.google.android.gms.location.history android.permission.`printenv perm`; unset perm; done; setprop persist.gms.location_history_fixed 1; }"
+
+on property:sys.boot_completed=1 && property:sys.user_present=1
+  exec u:r:su:s0 -- /bin/sh -c "[ -f /data/backup_restored ] && { rm /data/backup_restored; sleep 3; sync; reboot; }"
+  exec_background u:r:su:s0 -- /bin/sh -c "[ -f /data/user_de/0/com.android.systemui/shared_prefs/status_bar.xml ] && { post_migrate.sh; }"
+  exec_background u:r:su:s0 -- /bin/sh -c "sleep 60; setprop persist.storage.apps.trim_caches 0"
+
+on property:sys.boot_completed=1 && property:sys.user_present=1 && property:sys.app.systemui.qs_expanded=0
+  exec u:r:su:s0 -- /bin/sh -c "getprop sys.cpu.policy0.governor >/sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
+
+on property:sys.boot_completed=1 && property:sys.user_present=1 && property:sys.app.systemui.qs_expanded=1
+  exec u:r:su:s0 -- /bin/sh -c "setprop sys.cpu.policy0.governor `cat /sys/devices/system/cpu/cpufreq/policy0/scaling_governor`; echo performance >/sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
+
+on property:sys.boot_completed=1 && property:persist.mi_thermald.disabled=1
+  stop mi_thermald
+
+on property:sys.boot_completed=1 && property:persist.mi_thermald.disabled=0
+  start mi_thermald
+
+on property:sys.boot_completed=1 && property:sys.perf.force_dexopt=1
+  exec_background u:r:su:s0 -- /bin/sh -c "cmd package bg-dexopt-job; setprop sys.perf.force_dexopt 0"
+
+on property:sys.boot_completed=1 && property:sys.user_present=1 && property:persist.storage.apps.trim_caches=1
+  exec_background u:r:su:s0 -- /bin/sh -c "pm trim-caches 100g; setprop persist.storage.apps.trim_caches 0"
+
+on property:persist.custom_emojis.enabled=1
+  exec u:r:su:s0 -- /bin/mount --bind /system/fonts/NotoColorEmojiCustom.ttf /system/fonts/NotoColorEmoji.ttf
+
+service pq-2-2 /bin/sleep 12345d
+  disabled
+
+service displayfeature-hal-1-0 /bin/sleep 12345d
+  disabled
+
+service vendor.vibrator-1-0 /bin/sleep 12345d
+  disabled
+
+service vendor.mtk.vibrator-1-2 /bin/sleep 12345d
+  disabled
+
+service charger /bin/charger
+  class charger
+  user system
+  group system graphics wakelock input
+  capabilities SYS_BOOT
+  critical

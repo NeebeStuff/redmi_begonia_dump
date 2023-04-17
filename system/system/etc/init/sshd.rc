@@ -1,0 +1,12 @@
+on property:sshd.initialized=1 && property:persist.sshd.enabled=1
+  start sshd
+
+service sshd /system/bin/start-ssh
+  disabled
+  user root
+  group root
+
+on post-fs-data
+  mkdir /data/ssh 0750 root shell encryption=Require
+  mkdir /data/ssh/empty 0600 root shell
+  setprop sshd.initialized 1
