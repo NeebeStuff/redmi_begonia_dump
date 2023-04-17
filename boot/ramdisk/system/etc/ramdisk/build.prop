@@ -1,0 +1,20 @@
+####################################
+# from generate-common-build-props
+# These properties identify this partition image.
+####################################
+ro.product.bootimage.brand=Redmi
+ro.product.bootimage.device=begonia
+ro.product.bootimage.manufacturer=Xiaomi
+ro.product.bootimage.model=Redmi Note 8 Pro
+ro.product.bootimage.name=lineage_begonia
+ro.bootimage.build.date=Thu Apr 13 00:53:27 +07 2023
+ro.bootimage.build.date.utc=1681322007
+ro.bootimage.build.fingerprint=Redmi/lineage_begonia/begonia:13/TQ1A.230205.002/nobody04130053:userdebug/release-keys
+ro.bootimage.build.id=TQ1A.230205.002
+ro.bootimage.build.tags=release-keys
+ro.bootimage.build.type=userdebug
+ro.bootimage.build.version.incremental=1681322268
+ro.bootimage.build.version.release=13
+ro.bootimage.build.version.release_or_codename=13
+ro.bootimage.build.version.sdk=33
+# end of file
