@@ -1,0 +1,55 @@
+{
+    "format_version": 1000000,
+    "global": {
+        "apusys_present": false,
+        "apusys_version": 0,
+        "tcm_size_kb": 0,
+        "attributes": {}
+    },
+    "devices": {
+        "VPU": {
+            "name": "VPU",
+            "version": 2000000,
+            "amount": 2,
+            "compatibility": {
+                "min_version": 2000000,
+                "max_version": 2000000
+            },
+            "attributes": {
+                "ip-name": "VP6",
+                "fpu": false,
+                "dual-core": true,
+                "cv-support": true,
+                "microp-support": false,
+                "libvpu-version": 3001000,
+                "memory": {
+                    "bank0": 118448,
+                    "bank1": 118784
+                }
+            }
+        },
+        "GPU": {
+            "name": "ARM_GPU",
+            "version": 2005000,
+            "amount": 1,
+            "compatibility": {
+                "min_version": 2005000,
+                "max_version": 2005000
+            },
+            "attributes": {
+                "gpu_name": "mali",
+                "gpu_target": "valhall"
+            }
+        },
+        "NEON": {
+            "name": "ARM_CPU",
+            "version": 1000000,
+            "amount": 1,
+            "compatibility": {
+                "min_version": 1000000,
+                "max_version": 1005000
+            },
+            "attributes": {}
+        }
+    }
+}                 
