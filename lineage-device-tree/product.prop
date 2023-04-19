@@ -1,0 +1,6 @@
+dalvik.vm.systemservercompilerfilter=speed-profile
+ro.config.alarm_alert=Hassium.ogg
+ro.config.notification_sound=Argon.ogg
+ro.config.ringtone=Orion.ogg
+ro.input.video_enabled=false
+ro.support_one_handed_mode=true

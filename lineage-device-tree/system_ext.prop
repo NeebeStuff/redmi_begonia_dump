@@ -1,0 +1,4 @@
+arm64.memtag.process.system_server=off
+dalvik.vm.dex2oat64.enabled=true
+ro.sf.blurs_are_expensive=1
+ro.surface_flinger.supports_background_blur=1
