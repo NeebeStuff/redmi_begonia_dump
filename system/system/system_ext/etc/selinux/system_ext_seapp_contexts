@@ -1,0 +1,2 @@
+user=_app isPrivApp=true seinfo=platform name=com.libremobileos.vncflinger domain=vncflinger type=app_data_file levelFrom=user
+user=_app isPrivApp=true seinfo=platform name=org.risingos.updater domain=updater_app type=app_data_file levelFrom=user
