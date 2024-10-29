@@ -1,0 +1,20 @@
+#!/bin/bash
+
+cat recovery.img.* 2>/dev/null >> recovery.img
+rm -f recovery.img.* 2>/dev/null
+cat system/system/system_ext/priv-app/Launcher3QuickStep/Launcher3QuickStep.apk.* 2>/dev/null >> system/system/system_ext/priv-app/Launcher3QuickStep/Launcher3QuickStep.apk
+rm -f system/system/system_ext/priv-app/Launcher3QuickStep/Launcher3QuickStep.apk.* 2>/dev/null
+cat system/system/system_ext/priv-app/Settings/Settings.apk.* 2>/dev/null >> system/system/system_ext/priv-app/Settings/Settings.apk
+rm -f system/system/system_ext/priv-app/Settings/Settings.apk.* 2>/dev/null
+cat system/system/priv-app/MiuiCameraLeica/MiuiCameraLeica.apk.* 2>/dev/null >> system/system/priv-app/MiuiCameraLeica/MiuiCameraLeica.apk
+rm -f system/system/priv-app/MiuiCameraLeica/MiuiCameraLeica.apk.* 2>/dev/null
+cat system/system/product/app/webview/webview.apk.* 2>/dev/null >> system/system/product/app/webview/webview.apk
+rm -f system/system/product/app/webview/webview.apk.* 2>/dev/null
+cat system/system/product/app/LatinIME/LatinIME.apk.* 2>/dev/null >> system/system/product/app/LatinIME/LatinIME.apk
+rm -f system/system/product/app/LatinIME/LatinIME.apk.* 2>/dev/null
+cat boot.img.* 2>/dev/null >> boot.img
+rm -f boot.img.* 2>/dev/null
+cat vendor/etc/recovery.img.* 2>/dev/null >> vendor/etc/recovery.img
+rm -f vendor/etc/recovery.img.* 2>/dev/null
+cat vendor/etc/camera/apu_miai_fragment.bin.* 2>/dev/null >> vendor/etc/camera/apu_miai_fragment.bin
+rm -f vendor/etc/camera/apu_miai_fragment.bin.* 2>/dev/null

@@ -1,0 +1,12 @@
+# Miscellaneous
+dalvik.vm.systemservercompilerfilter=speed-profile
+ro.config.alarm_alert=material_gentle.ogg
+ro.config.notification_sound=material_simple_1.ogg
+ro.config.ringtone=material_minimal.ogg
+ro.dalvik.vm.enable_uffd_gc=true
+ro.product.build.16k_page.enabled=false
+ro.product.cpu.pagesize.max=4096
+ro.support_one_handed_mode=true
+setupwizard.feature.day_night_mode_enabled=true
+setupwizard.theme=glif_v4
+

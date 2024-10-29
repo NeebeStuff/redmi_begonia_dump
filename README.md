@@ -1,0 +1,20 @@
+## begonia-user 11 RP1A.200720.011 V12.5.8.0.RGGMIXM release-keys
+- Manufacturer: xiaomi
+- Platform: mt6785
+- Codename: begonia
+- Brand: Redmi
+- Flavor: voltage_begonia-userdebug
+- Release Version: 14
+- Kernel Version: 4.14.186
+- Id: AP2A.240905.003
+- Incremental: eng.nobody.20241029.084630
+- Tags: release-keys
+- CPU Abilist: 
+- A/B Device: false
+- Treble Device: true
+- Locale: en-US
+- Screen Density: undefined
+- Fingerprint: Redmi/begonia/begonia:11/RP1A.200720.011/V12.5.8.0.RGGMIXM:user/release-keys
+- OTA version: 
+- Branch: begonia-user-11-RP1A.200720.011-V12.5.8.0.RGGMIXM-release-keys
+- Repo: redmi_begonia_dump
