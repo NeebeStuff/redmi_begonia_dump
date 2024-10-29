@@ -1,0 +1,14 @@
+####################################
+# from generate-common-build-props
+# These properties identify this partition image.
+####################################
+ro.product.system_ext.brand=Redmi
+ro.product.system_ext.device=begonia
+ro.product.system_ext.manufacturer=Xiaomi
+ro.product.system_ext.model=Redmi Note 8 Pro
+ro.product.system_ext.name=voltage_begonia
+####################################
+# from variable PRODUCT_SYSTEM_EXT_PROPERTIES
+####################################
+ro.face.sense_service=true
+# end of file

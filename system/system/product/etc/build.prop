@@ -1,0 +1,19 @@
+####################################
+# from variable ADDITIONAL_PRODUCT_PROPERTIES
+####################################
+dalvik.vm.systemservercompilerfilter=speed-profile
+ro.product.build.16k_page.enabled=false
+ro.build.characteristics=default
+ro.product.cpu.pagesize.max=4096
+# Value overridden by post_process_props.py. Original value: default
+ro.dalvik.vm.enable_uffd_gc=true
+####################################
+# from variable PRODUCT_PRODUCT_PROPERTIES
+####################################
+setupwizard.theme=glif_v4
+setupwizard.feature.day_night_mode_enabled=true
+ro.config.ringtone=material_minimal.ogg
+ro.config.alarm_alert=material_gentle.ogg
+ro.config.notification_sound=material_simple_1.ogg
+ro.support_one_handed_mode=true
+# end of file
