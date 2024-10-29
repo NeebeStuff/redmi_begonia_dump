@@ -1,0 +1,10 @@
+####################################
+# from generate-common-build-props
+# These properties identify this partition image.
+####################################
+ro.product.vendor_dlkm.brand=Redmi
+ro.product.vendor_dlkm.device=begonia
+ro.product.vendor_dlkm.manufacturer=Xiaomi
+ro.product.vendor_dlkm.model=Redmi Note 8 Pro
+ro.product.vendor_dlkm.name=voltage_begonia
+# end of file
