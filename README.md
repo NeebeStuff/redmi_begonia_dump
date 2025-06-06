@@ -1,0 +1,20 @@
+## TQ2A.230505.002
+- Manufacturer: xiaomi
+- Platform: mt6785
+- Codename: begonia
+- Brand: Redmi
+- Flavor: lineage_begonia-userdebug
+- Release Version: 13
+- Kernel Version: 4.14.186
+- Id: TQ2A.230505.002
+- Incremental: 1721705430
+- Tags: release-keys
+- CPU Abilist: arm64-v8a,armeabi-v7a,armeabi
+- A/B Device: false
+- Treble Device: true
+- Locale: en-US
+- Screen Density: undefined
+- Fingerprint: Redmi/begonia/begonia:11/RP1A.200720.011/V12.5.8.0.RGGMIXM:user/release-keys
+- OTA version: 
+- Branch: TQ2A.230505.002
+- Repo: redmi_begonia_dump
