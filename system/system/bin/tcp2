@@ -1,0 +1,6 @@
+# Networking tweaks
+echo "1" > /proc/sys/net/ipv4/tcp_low_latency
+echo "2" > /proc/sys/net/ipv4/tcp_ecn
+echo "3" > /proc/sys/net/ipv4/tcp_fastopen
+echo "1" > /proc/sys/net/ipv4/tcp_sack
+echo "0" > /proc/sys/net/ipv4/tcp_timestamps

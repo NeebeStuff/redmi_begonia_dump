@@ -1,0 +1,9 @@
+on fetch_pifp_action
+  exec_background u:r:su:s0 -- /bin/sh -c "rm /data/system/pifp.tmp; curl -o /data/system/pifp.tmp --retry 2 --connect-timeout 10 --max-filesize 1m -s -w '%{http_code}' 'http://timjosten.com/projects/crdroid/pifp/?device=begonia&id='`getprop ro.boot.chipid | tr -d '\n' | md5sum -b` | grep -q ^200 || { rm /data/system/pifp.tmp; exit; }; [ ! -f /data/system/pifp.tmp ] && exit; cmp -s /data/system/pifp.tmp /data/system/pifp.txt && { rm /data/system/pifp.tmp; exit; }; mv /data/system/pifp.tmp /data/system/pifp.txt; chmod 644 /data/system/pifp.txt; chcon u:object_r:system_file:s0 /data/system/pifp.txt; killall com.google.android.gms.unstable"
+
+on property:sys.pifp=fetch
+  trigger fetch_pifp_action
+
+on property:sys.boot_completed=1 && property:sys.user_present=1
+  exec_background u:r:su:s0 -- /bin/sh -c "while true; do sleep 90m; setprop sys.pifp fetch; done"
+  trigger fetch_pifp_action

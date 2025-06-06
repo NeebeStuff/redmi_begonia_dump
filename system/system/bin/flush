@@ -1,0 +1,31 @@
+am start -a android.intent.action.MAIN -e toasttext "Waiting until finished" -n bellavita.toast/.MainActivity
+echo $P"Droping Apps Cached"
+$busybox sync; echo 3 > /proc/sys/vm/drop_caches
+sync && echo 3 > /proc/sys/vm/drop_caches
+sleep 0.1
+echo 1 > /proc/sys/vm/drop_caches
+  pm list packages -a | cut -d: -f2 | sort > /cache/forcestop.list
+  if grep "com.android.systemui" /cache/forcestop.list > /dev/null 2>&1; then
+    sed '/com.android.systemui/d' -i /cache/forcestop.list 2>&1  
+  fi
+  if grep "com.android.settings" /cache/forcestop.list > /dev/null 2>&1; then
+    sed '/com.android.settings/d' -i /cache/forcestop.list 2>&1
+  fi
+if grep "bin.mt.plus.canary" /cache/forcestop.list > /dev/null 2>&1; then
+    sed '/bin.mt.plus.canary/d' -i /cache/forcestop.list 2>&1
+  fi
+ if [ -f /cache/forcestop.list ]; then
+    fstoplist=$(cat /cache/forcestop.list | cut -d: -f2) > /dev/null 2>&1;
+  fi
+echo $R"Force Stopping All Apps"
+for pkg in $fstoplist; do
+echo $B"Force Stopping $Y$pkg"
+am force-stop $pkg
+done
+sleep 0.1
+echo $R"Flushing done"
+  if [ -f /cache/forcestop.list ]; then
+    rm -rf /cache/forcestop.list
+  fi
+am start -a android.intent.action.MAIN -e toasttext "☘️Flushing successful" -n bellavita.toast/.MainActivity
+exit 0
