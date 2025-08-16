@@ -1,0 +1,20 @@
+apply() {
+    local val="$1"
+    local file="$2"
+    [ -f "$file" ] || return
+    chmod 644 "$file"
+    echo "$val" > "$file"
+    chmod 444 "$file"
+}
+
+apply "7 1" /proc/ppm/policy_status
+apply "1 1002000" /proc/ppm/policy/hard_userlimit_max_cpu_freq
+apply "0 1175000" /proc/ppm/policy/hard_userlimit_max_cpu_freq
+apply "1 -1" /proc/ppm/policy/hard_userlimit_min_cpu_freq
+apply "0 -1" /proc/ppm/policy/hard_userlimit_min_cpu_freq
+apply "-1 -1" /proc/ppm/policy/ut_fix_freq_idx
+echo "[ULTRA LIMIT]"
+sleep 2
+echo "=== Done ==="
+am start -a android.intent.action.MAIN -e toasttext "Ultra limit Cpu" -n bellavita.toast/.MainActivity
+exit 0

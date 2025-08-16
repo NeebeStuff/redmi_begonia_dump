@@ -1,0 +1,68 @@
+{
+  "localId": "b004d74e-5c49-430c-bb6a-18ed5d2d33e4",
+  "onlineId": null,
+  "assemblyId": "b004d74e-5c49-430c-bb6a-18ed5d2d33e4",
+  "productId": null,
+  "hash": "a74a3d6ef96d73859c7eb615049c8b5c84f78434",
+  "platform": 8,
+  "size": 19116860,
+  "updatedTime": 0,
+  "version": "1.00",
+  "authors": {
+    "zh_CN": "MIUI",
+    "fallback": "MIUI"
+  },
+  "designers": {
+    "zh_CN": "MIUI",
+    "fallback": "MIUI"
+  },
+  "titles": {
+    "zh_CN": "小米兰亭Pro",
+    "fallback": "小米兰亭Pro"
+  },
+  "descriptions": {
+    "fallback": ""
+  },
+  "builtInThumbnails": {
+    "fallback": [
+      "preview_fonts_small_0.png",
+      "preview_fonts_0.jpg",
+      "preview_fonts_1.jpg",
+      "preview_fonts_2.jpg"
+    ]
+  },
+  "builtInPreviews": {
+    "fallback": [
+      "preview_fonts_0.jpg",
+      "preview_fonts_1.jpg",
+      "preview_fonts_2.jpg"
+    ]
+  },
+  "thumbnails": [],
+  "previews": [],
+  "parentResources": [
+    {
+      "localId": "37ac9aee-b246-4b51-ba6f-8a0127f620de",
+      "resourceCode": "theme",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    }
+  ],
+  "subResources": [],
+  "extraMeta": {},
+  "metaPath": null,
+  "contentPath": null,
+  "rightsPath": null,
+  "screenRatio": null,
+  "supportHomeSearchBar": false,
+  "packageVersion": null,
+  "packageName": null,
+  "officialIcons": false,
+  "iconsCount": null,
+  "fontWeight": "150,200,250,305,340,400,480,540,630,700",
+  "price": 0,
+  "isBackUpVersion": false,
+  "themeType": 0,
+  "miuiAdapterVersion": null
+}

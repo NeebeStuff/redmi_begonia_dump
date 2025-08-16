@@ -1,0 +1,169 @@
+{
+  "localId": "c5350658-7585-47bb-a186-946df636a72f",
+  "onlineId": null,
+  "assemblyId": null,
+  "productId": null,
+  "hash": "81955476d48bb31bcaac4464ee19a0a8f3890ae1",
+  "platform": 10,
+  "size": 16786660,
+  "updatedTime": 0,
+  "version": "1.0",
+  "authors": {
+    "en_US": "Bhavuk Verma",
+    "zh_CN": "Bhavuk Verma",
+    "fallback": "Bhavuk Verma"
+  },
+  "designers": {
+    "en_US": "Bhavuk Verma",
+    "zh_CN": "Bhavuk Verma",
+    "fallback": "Bhavuk Verma"
+  },
+  "titles": {
+    "en_US": "iMac",
+    "zh_CN": "Realiox 15 Beta",
+    "fallback": "Realiox 15 Beta"
+  },
+  "descriptions": {
+    "en_US": "iOS inspired theme\nJoin Telegram Channel : https://telegram.me/MiThemesIndia/",
+    "fallback": ""
+  },
+  "builtInThumbnails": {
+    "en_US": [
+      "en_US_lockscreen_0.jpg",
+      "en_US_launcher_0.jpg",
+      "en_US_launcher_1.jpg",
+      "en_US_statusbar_0.jpg",
+      "en_US_statusbar_1.jpg",
+      "en_US_contact_0.jpg",
+      "en_US_icons_0.jpg",
+      "en_US_icons_1.jpg",
+      "en_US_icons_2x3_0.jpg",
+      "en_US_icons_4x3_0.jpg"
+    ]
+  },
+  "builtInPreviews": {
+    "en_US": [
+      "en_US_lockscreen_0.jpg",
+      "en_US_launcher_0.jpg",
+      "en_US_launcher_1.jpg",
+      "en_US_statusbar_0.jpg",
+      "en_US_statusbar_1.jpg",
+      "en_US_contact_0.jpg",
+      "en_US_icons_0.jpg",
+      "en_US_icons_1.jpg",
+      "en_US_icons_2x3_0.jpg",
+      "en_US_icons_4x3_0.jpg"
+    ]
+  },
+  "thumbnails": [],
+  "previews": [],
+  "parentResources": [],
+  "subResources": [
+    {
+      "localId": "fead3b8c-a409-440e-ad8f-24f54aa7f9bd",
+      "resourceCode": "contact",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "8fa5af67-c202-4653-94c3-668817674d2d",
+      "resourceCode": "wallpaper",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "d953d2e8-fc80-4f3b-b258-e5e93096fa02",
+      "resourceCode": "lockstyle",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "3742426d-375b-4fc4-a491-0a6f342df5c3",
+      "resourceCode": "framework",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "f5e31553-9116-4a21-bf38-752856031e7a",
+      "resourceCode": "launcher",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "1bc23482-172c-41c6-ae33-663ab00e3066",
+      "resourceCode": "statusbar",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "e183f706-159a-4a6a-97a2-0c5eb0817502",
+      "resourceCode": "lockscreen",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "6cd5b418-b187-4084-a547-fad630ed127f",
+      "resourceCode": "framework-miui-res",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "3dfc400a-d3ce-464b-bcd8-58c0d45b0c08",
+      "resourceCode": "com.android.camera",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "4b751a6b-b100-4684-bb13-1cabe037d93f",
+      "resourceCode": "com.android.fileexplorer",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "e72a6e4d-cfd9-47a0-8a82-778af4507993",
+      "resourceCode": "icons",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "e3122420-90f6-4c6c-a1d4-7e501b33dc07",
+      "resourceCode": "com.android.updater",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    },
+    {
+      "localId": "542f940e-f251-4480-9147-153b3744cf45",
+      "resourceCode": "clock_2x4",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    }
+  ],
+  "extraMeta": {},
+  "metaPath": null,
+  "contentPath": null,
+  "rightsPath": null,
+  "screenRatio": null,
+  "supportHomeSearchBar": false,
+  "packageVersion": null,
+  "packageName": null,
+  "officialIcons": false,
+  "iconsCount": null,
+  "fontWeight": null,
+  "price": -1,
+  "isBackUpVersion": false,
+  "themeType": 0,
+  "miuiAdapterVersion": "2.0"
+}

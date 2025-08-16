@@ -1,0 +1,43 @@
+#!/system/bin/sh
+# 🔥 Disable Thermal Service
+
+# Hentikan thermal core services
+stop mi_thermald
+stop thermal
+stop thermalloadalgod
+stop vendor.thermal-hal-2-0.mtk
+stop init.svc.vendor.thermal-hal-2-0.mtk
+
+# Stop semua service thermal dari properti
+getprop | grep -F 'init.svc.' | grep thermal | awk -F'[][]' '{print $2}' | sed 's/init.svc.//' | while read -r svc; do
+    stop "$svc"
+done
+
+# Set semua properti thermal ke "stopped"
+getprop | grep -F 'init.svc.' | grep thermal | awk -F'[][]' '{print $2}' | while read -r prop; do
+    setprop "$prop" stopped
+done
+
+# Kosongkan properti init.svc_ yang berhubungan dengan thermal
+getprop | grep -F 'init.svc_' | grep thermal | awk -F'[][]' '{print $2}' | while read -r prop; do
+    setprop "$prop" ""
+done
+
+# Nonaktifkan semua node throttling (echo 0)
+find /sys/ -type f -name throttling 2>/dev/null | while read -r node; do
+    echo 0 > "$node"
+done
+
+# Stop logd & thermal dari init.svc properti
+getprop | grep -F 'init.svc.' | grep -E 'thermal|logd' | awk -F'[][]' '{print $2}' | while read -r prop; do
+    svc_name=$(echo "$prop" | cut -d. -f3)
+    stop "$svc_name"
+    resetprop -n "$prop" stopped
+done
+
+# Tampilkan notifikasi
+echo "[THERMAL SERVICE STOP]"
+sleep 2
+echo "=== Done ==="
+am start -a android.intent.action.MAIN -e toasttext "🔥 Thermal stop" -n bellavita.toast/.MainActivity
+exit 0

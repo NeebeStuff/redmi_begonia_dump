@@ -1,0 +1,43 @@
+#!/system/bin/sh
+# ❄️ Restore Thermal Service
+
+# Start core thermal services
+start mi_thermald
+start thermal
+start thermalloadalgod
+start vendor.thermal-hal-2-0.mtk
+start init.svc.vendor.thermal-hal-2-0.mtk
+
+# Start semua service thermal dari properti
+for svc in $(getprop | grep thermal | awk -F'[][]' '/init\.svc/{print $2}' | sed 's/init\.svc\.//'); do
+    start "$svc"
+done
+
+# Set semua properti thermal ke "running"
+for prop in $(getprop | grep thermal | awk -F'[][]' '/init\.svc/{print $2}'); do
+    setprop "$prop" running
+done
+
+# Kosongkan init.svc_ property jika ada
+for prop in $(getprop | grep thermal | awk -F'[][]' '/init\.svc_/{print $2}'); do
+    setprop "$prop" ""
+done
+
+# Re-enable throttling node 
+find /sys/ -type f -name throttling 2>/dev/null | while read -r node; do
+    echo 1 > "$node"
+done
+
+# Start semua logd & thermal dari getprop (fallback)
+getprop | grep init.svc | grep -E "thermal|logd" | awk -F'[][]' '{print $2}' | while read -r prop; do
+    svc_name=$(echo "$prop" | cut -d. -f3)
+    start "$svc_name"
+    resetprop -n "$prop" running
+done
+
+# Notifikasi (opsional)
+echo "[THERMAL RUN]"
+sleep 2
+echo "=== Done ==="
+am start -a android.intent.action.MAIN -e toasttext "❄️ Thermal run" -n bellavita.toast/.MainActivity
+exit 0

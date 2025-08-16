@@ -1,0 +1,119 @@
+#!/system/bin/sh
+
+# Warna 
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+clear
+echo -e "${YELLOW}"
+echo -e "██╗░░░██╗███╗░░██╗██╗░█████╗░███╗░░██╗"
+echo -e "██║░░░██║████╗░██║██║██╔══██╗████╗░██║"
+echo -e "██║░░░██║██╔██╗██║██║██║░░██║██╔██╗██║"
+echo -e "██║░░░██║██║╚████║██║██║░░██║██║╚████║"
+echo -e "╚██████╔╝██║░╚███║██║╚█████╔╝██║░╚███║"
+echo -e "░╚═════╝░╚═╝░░╚══╝╚═╝░╚════╝░╚═╝░░╚══╝"
+echo -e "${NC}"
+
+echo ""
+echo "     Welcome to MIUI Union"
+echo " Custom Performance & Visual Tweak Center"
+echo " Optimized for speed, smoothness, control"
+echo ""
+echo -e "${YELLOW}Device Info:${NC}"
+echo -e " Kernel : $(uname -r)"
+echo -e " Uptime : $(uptime -p)"
+echo -e " CPU    : $(getprop ro.product.cpu.abi)"
+echo -e " RAM    : $(free -m | grep Mem | awk '{print $3 "MB / " $2 "MB"}')"
+echo ""
+
+echo "         ANDROID TWEAK MENU"
+echo ""
+echo " 1. Flush RAM"
+echo " 2. Default cpu"
+echo " 3. Soft limit cpu"
+echo " 4. Hard limit cpu"
+echo " 5. Ultra limit cpu"
+echo " 6. Max No limit cpu"
+echo " 7. Set reso layar 720p"
+echo " 8. Reset reso layar"
+echo " 9. Stop thermal"
+echo " 10. Run thermal"
+echo " 11. High saturation colour"
+echo " 12. Reset saturation colour"
+echo " 0. Keluar"
+echo ""
+echo -en "${YELLOW}Pilih opsi: ${NC}"
+read PILIH
+
+case "$PILIH" in
+  1)
+    echo -e "${CYAN}→ Menjalankan flush...${NC}"
+    sh /system/bin/flush
+    am force-stop com.termux
+    ;;
+  2)
+    echo -e "${CYAN}→ Mengatur cpu default...${NC}"
+    sh /system/bin/cpu_reset
+    am force-stop com.termux
+    ;;
+  3)
+    echo -e "${CYAN}→ Mengatur soft limit cpu...${NC}"
+    sh /system/bin/soft_limit
+    am force-stop com.termux
+    ;;  
+  4)
+    echo -e "${CYAN}→ Mengatur hard limit cpu...${NC}"
+    sh /system/bin/hard_limit
+    am force-stop com.termux
+    ;;
+  5)
+    echo -e "${CYAN}→ Mengatur ultra limit cpu...${NC}"
+    sh /system/bin/ultra_limit
+    am force-stop com.termux
+    ;;
+  6)
+    echo -e "${CYAN}→ Mengatur no limit cpu...${NC}"
+    sh /system/bin/max
+    am force-stop com.termux
+    ;;
+  7)
+    echo -e "${CYAN}→ Mengatur no limit cpu...${NC}"
+    sh /system/bin/reso720
+    am force-stop com.termux
+    ;;
+  8)
+    echo -e "${CYAN}→ Mengatur no limit cpu...${NC}"
+    sh /system/bin/reset_reso
+    am force-stop com.termux
+    ;; 
+  9)
+    echo -e "${CYAN}→ Mengatur no limit cpu...${NC}"
+    sh /system/bin/thermalOff
+    am force-stop com.termux
+    ;; 
+  10)
+    echo -e "${CYAN}→ Mengatur no limit cpu...${NC}"
+    sh /system/bin/thermalOn
+    am force-stop com.termux
+    ;;
+  11)
+    echo -e "${CYAN}→ Mengatur no limit cpu...${NC}"
+    sh /system/bin/high_satur
+    am force-stop com.termux
+    ;;
+  12)
+    echo -e "${CYAN}→ Mengatur no limit cpu...${NC}"
+    sh /system/bin/reset_satur
+    am force-stop com.termux
+    ;;
+  0)
+    echo -e "${RED}Keluar...${NC}"
+    am force-stop com.termux
+    ;;
+  *)
+    echo -e "${RED}Pilihan tidak valid!${NC}"
+    ;;
+esac

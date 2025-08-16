@@ -1,0 +1,63 @@
+#!/system/bin/sh
+# reso_apply.sh 
+
+BACKUP_DIR="/data/local/tmp/reso_backup"
+mkdir -p "$BACKUP_DIR"
+
+# Ambil density: override jika ada, fallback ke physical
+if wm density | grep -q "Override"; then
+    wm density | grep "Override"  | grep -oE '[0-9]+' | head -n1 > "$BACKUP_DIR/density.bak"
+else
+    wm density | grep "Physical" | grep -oE '[0-9]+' | head -n1 > "$BACKUP_DIR/density.bak"
+fi
+
+# Ambil ukuran resolusi asli
+wm size | grep -oE '[0-9]+x[0-9]+' | head -n1 > "$BACKUP_DIR/size.bak"
+
+# Terapkan resolusi & density baru
+wm density 320
+wm size 720x1560
+
+put_overlay() {
+    device_config put game_overlay "$1" "$2"
+}
+
+# Package|config
+GAME_CONFIGS="
+com.tencent.ig|mode=2,downscaleFactor=0.6,useAngle=true,fps=60,loadingBoost=1,anisotropicFiltering=0,antiAliasing=0,shadows=0,useSkiaRenderer=true,colorSaturationBoost=2.1,sharpeningLevel=1.0
+com.pubg.krmobile|mode=2,downscaleFactor=0.6,fps=60,useAngle=true,colorSaturationBoost=1.1,sharpeningLevel=1.1
+com.vng.pubgmobile|mode=2,downscaleFactor=0.5,fps=60,useAngle=true,colorSaturationBoost=1.1,sharpeningLevel=1.1
+com.pubg.imobile|mode=2,downscaleFactor=0.6,fps=60,useAngle=true,colorSaturationBoost=1.1,sharpeningLevel=1.1
+com.epicgames.fortnite|mode=2,downscaleFactor=0.6,fps=60,shadows=0,antiAliasing=0,colorSaturationBoost=1.1
+com.miHoYo.GenshinImpact|mode=2,downscaleFactor=0.7,useAngle=true,fps=60,antiAliasing=0,shadows=0,colorSaturationBoost=1.15,sharpeningLevel=1.1
+com.HoYoverse.hkrpgoversea|mode=2,downscaleFactor=0.7,fps=60,useAngle=true,antiAliasing=0,useSkiaRenderer=true,shadows=0,colorSaturationBoost=1.1,sharpeningLevel=1.15
+com.mobile.legends|mode=2,downscaleFactor=0.6,fps=60,useSkiaRenderer=true,colorSaturationBoost=1.05,sharpeningLevel=1.05
+com.dts.freefireth|mode=2,downscaleFactor=0.6,fps=60,loadingBoost=1,useSkiaRenderer=true,colorSaturationBoost=1.1
+com.activision.callofduty.shooter|mode=2,downscaleFactor=0.6,fps=60,loadingBoost=1,useSkiaRenderer=true,colorSaturationBoost=1.1,sharpeningLevel=1.1
+com.netease.lztgglobal|mode=2,downscaleFactor=0.6,fps=60,useAngle=true,shadows=0,colorSaturationBoost=1.1
+com.nexon.bluearchive|mode=2,downscaleFactor=0.6,fps=60,useSkiaRenderer=true,colorSaturationBoost=1.1
+com.stove.epic7|mode=2,downscaleFactor=0.6,fps=60,colorSaturationBoost=1.05
+com.pearlabyss.blackdesertm|mode=2,downscaleFactor=0.6,fps=60,antiAliasing=0,shadows=0,colorSaturationBoost=1.1
+com.bandainamcoent.sevenknights2|mode=2,downscaleFactor=0.6,fps=60,loadingBoost=1,colorSaturationBoost=1.1
+com.garena.game.codm|mode=2,downscaleFactor=0.6,fps=60,loadingBoost=1,colorSaturationBoost=1.1
+com.square_enix.android_googleplay.nierspww|mode=2,downscaleFactor=0.6,fps=60,colorSaturationBoost=1.1
+com.dena.sonicracing|mode=2,downscaleFactor=0.6,fps=60,useSkiaRenderer=true
+com.riotgames.league.wildrift|mode=2,downscaleFactor=0.6,fps=60,useSkiaRenderer=true,colorSaturationBoost=1.05
+com.riotgames.valorantmobile|mode=2,downscaleFactor=0.6,fps=60,colorSaturationBoost=1.05
+com.madfingergames.legends|mode=2,downscaleFactor=0.6,fps=60,colorSaturationBoost=1.05
+jp.konami.pesam|mode=2,downscaleFactor=0.6,fps=60,loadingBoost=1,colorSaturationBoost=1.1,sharpeningLevel=1.05
+com.levelinfinite.sgameGlobal|mode=2,downscaleFactor=0.6,fps=60,useSkiaRenderer=true,colorSaturationBoost=1.1,sharpeningLevel=1.05
+"
+# Loop game
+echo "$GAME_CONFIGS" | while IFS='|' read -r package config; do
+    put_overlay "$package" "$config"
+done
+
+# Notif
+echo "[RESO 720P]"
+sleep 2
+echo "=== Done ==="
+am start -a android.intent.action.MAIN \
+    -e toasttext "✅ downscale applied" \
+    bellavita.toast/.MainActivity
+exit 0

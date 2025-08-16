@@ -1,0 +1,61 @@
+#!/system/bin/sh
+# reso_reset.sh
+
+BACKUP_DIR="/data/local/tmp/reso_backup"
+DENSITY_FILE="$BACKUP_DIR/density.bak"
+SIZE_FILE="$BACKUP_DIR/size.bak"
+
+# Restore density jika ada
+if [ -f "$DENSITY_FILE" ]; then
+    wm density "$(cat "$DENSITY_FILE")"
+    rm -f "$DENSITY_FILE"
+fi
+
+# Restore size jika ada
+if [ -f "$SIZE_FILE" ]; then
+    wm size "$(cat "$SIZE_FILE")"
+    rm -f "$SIZE_FILE"
+fi
+
+# Bersihkan folder jika kosong
+rmdir "$BACKUP_DIR" 2>/dev/null
+
+# Reset game config overlay 
+RESET_PKGS="
+com.tencent.ig
+com.pubg.krmobile
+com.vng.pubgmobile
+com.pubg.imobile
+com.epicgames.fortnite
+com.miHoYo.GenshinImpact
+com.HoYoverse.hkrpgoversea
+com.mobile.legends
+com.dts.freefireth
+com.activision.callofduty.shooter
+com.netease.lztgglobal
+com.nexon.bluearchive
+com.stove.epic7
+com.pearlabyss.blackdesertm
+com.bandainamcoent.sevenknights2
+com.garena.game.codm
+com.square_enix.android_googleplay.nierspww
+com.dena.sonicracing
+com.riotgames.league.wildrift
+com.riotgames.valorantmobile
+com.madfingergames.legends
+jp.konami.pesam
+com.levelinfinite.sgameGlobal
+"
+for pkg in $RESET_PKGS; do
+    device_config delete game_overlay "$pkg"
+done
+
+# Notif
+echo "[RESO RESET]"
+sleep 2
+echo "=== Done ==="
+
+am start -a android.intent.action.MAIN \
+    -e toasttext "♻️reset applied" \
+    bellavita.toast/.MainActivity
+exit 0

@@ -1,0 +1,69 @@
+{
+  "localId": "1bc23482-172c-41c6-ae33-663ab00e3066",
+  "onlineId": null,
+  "assemblyId": null,
+  "productId": null,
+  "hash": "26d598dea36335ef03362ae0f0e01bbe5c28db89",
+  "platform": 10,
+  "size": 6052267,
+  "updatedTime": 0,
+  "version": "1.0",
+  "authors": {
+    "zh_CN": "Bhavuk Verma",
+    "fallback": "Bhavuk Verma",
+    "en_US": "Bhavuk Verma"
+  },
+  "designers": {
+    "zh_CN": "Bhavuk Verma",
+    "fallback": "Bhavuk Verma",
+    "en_US": "Bhavuk Verma"
+  },
+  "titles": {
+    "zh_CN": "Realiox 15 Beta",
+    "fallback": "Realiox 15 Beta",
+    "en_US": "iMac"
+  },
+  "descriptions": {
+    "fallback": "",
+    "en_US": "iOS inspired theme\nJoin Telegram Channel : https://telegram.me/MiThemesIndia/"
+  },
+  "builtInThumbnails": {
+    "en_US": [
+      "en_US_statusbar_0.jpg",
+      "en_US_statusbar_1.jpg"
+    ]
+  },
+  "builtInPreviews": {
+    "en_US": [
+      "en_US_statusbar_0.jpg",
+      "en_US_statusbar_1.jpg"
+    ]
+  },
+  "thumbnails": [],
+  "previews": [],
+  "parentResources": [
+    {
+      "localId": "c5350658-7585-47bb-a186-946df636a72f",
+      "resourceCode": "theme",
+      "extraMeta": {},
+      "metaPath": null,
+      "contentPath": null
+    }
+  ],
+  "subResources": [],
+  "extraMeta": {},
+  "metaPath": null,
+  "contentPath": null,
+  "rightsPath": null,
+  "screenRatio": null,
+  "supportHomeSearchBar": false,
+  "packageVersion": null,
+  "packageName": null,
+  "officialIcons": false,
+  "iconsCount": null,
+  "fontWeight": null,
+  "price": -1,
+  "isBackUpVersion": false,
+  "themeType": 0,
+  "miuiAdapterVersion": "2.0"
+}

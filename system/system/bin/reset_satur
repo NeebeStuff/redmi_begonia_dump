@@ -1,0 +1,6 @@
+service call SurfaceFlinger 1022 f 1.0
+echo "[SATURATION COLOUR RESET]"
+sleep 2
+echo "=== Done ==="
+am start -a android.intent.action.MAIN -e toasttext "Reset saturation" -n bellavita.toast/.MainActivity
+exit 0
