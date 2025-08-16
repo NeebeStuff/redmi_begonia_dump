@@ -1,0 +1,36 @@
+on post-fs-data
+	
+	# Governor
+	write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "schedutil"
+	write /sys/devices/system/cpu/cpufreq/policy6/scaling_governor "schedutil"
+	
+	# sched_boost off
+	write /sys/devices/system/cpu/sched/sched_boost "1"
+
+	# EAS boost	
+	write /proc/perfmgr/boost_ctrl/eas_ctrl/perfserv_fg_boost 15
+    write /proc/perfmgr/boost_ctrl/eas_ctrl/perfserv_ta_boost 10
+	
+	# Workqueue
+	write /sys/module/workqueue/parameters/power_efficient "Y"
+	write /sys/module/workqueue/parameters/disable_numa "N"
+	write /sys/devices/system/cpu/perf/enable "1"
+	
+	# Service
+    stop perf_init
+    disable perf_init
+    stop miuibooster
+    disable miuibooster
+    stop qadaemon
+    stop mqsasd
+    stop mi_thermald
+    stop thermal
+    stop thermalloadalgod
+		
+on property:sys.boot_completed=1
+    exec u:r:su:s0 -- /bin/sh -c "extra.sh"
+     
+
+
+
+
