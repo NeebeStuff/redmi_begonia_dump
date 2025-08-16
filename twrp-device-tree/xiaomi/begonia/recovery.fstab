@@ -1,0 +1,5 @@
+/system     ext4     /dev/block/platform/bootdevice/by-name/system       flags=display=system
+/vendor     ext4     /dev/block/platform/bootdevice/by-name/vendor       flags=display=vendor
+/misc       emmc     /dev/block/platform/bootdevice/by-name/misc         flags=display=misc
+/data       ext4     /dev/block/platform/bootdevice/by-name/userdata     flags=display=data
+/data       f2fs     /dev/block/platform/bootdevice/by-name/userdata     flags=display=data
